@@ -1,4 +1,4 @@
-.env
+# Python artefacts
 __pycache__/
 *.py[cod]
 *.egg-info/
@@ -9,21 +9,44 @@ build/
 .pytest_cache/
 .ruff_cache/
 .coverage
+coverage.xml
 htmlcov/
+
+# Secrets / environment
+.env
+.env.local
+
+# Node / Next.js
 node_modules/
 .next/
+
+# Infrastructure
 .terraform/
 *.tfstate*
+*.tfstate.backup
+
+# Dataset and model binaries (large files, not version controlled)
 data/raw/*
 data/processed/*
 data/external/*
 !data/**/.gitkeep
+
 models/*
 !models/.gitkeep
+
+# Runtime outputs
 outputs/
 runs/
 mlruns/
+mlflow/
+
+# ML model weights
 *.pt
 *.pth
 *.onnx
+*.safetensors
+*.bin
+
+# OS junk
 .DS_Store
+Thumbs.db
