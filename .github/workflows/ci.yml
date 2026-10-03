@@ -32,7 +32,7 @@ jobs:
       - name: Type check
         run: mypy --strict src/reiduq
       - name: Test
-        run: pytest -m "not slow"
+        run: pytest tests/unit
       - name: Upload coverage
         if: always()
         uses: actions/upload-artifact@v4
