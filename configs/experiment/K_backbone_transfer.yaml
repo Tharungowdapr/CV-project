@@ -1,0 +1,5 @@
+_base_: ../base.yaml
+name: K_backbone_transfer
+description: "Shows the calibrator is encoder-agnostic rather than exploiting an OSNet quirk."
+model:
+  backbone: transreid

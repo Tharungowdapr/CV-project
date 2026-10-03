@@ -1,0 +1,6 @@
+_base_: ../base.yaml
+name: B_leave_camera_out
+description: "RQ1, domain-shift axis. Test cameras are held out of both training and calibration."
+data:
+  protocol: leave_camera_out
+  held_out_cameras: ["c016", "c017", "c018", "c019", "c020"]

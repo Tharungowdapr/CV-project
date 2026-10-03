@@ -1,0 +1,68 @@
+# Base configuration. Every experiment config inherits from this with `_base_: ../base.yaml`.
+name: base
+description: "Shared defaults. Never run directly."
+
+data:
+  name: veri776
+  root: ./data/raw/VeRi
+  image_size: [256, 128]
+  protocol: in_distribution
+  calibration_fraction: 0.25
+  num_workers: 8
+
+occlusion:
+  enabled: false
+  mode: synthetic
+  occluder_bank: ./data/processed/occluders
+  feather_px: 2
+  match_jpeg_quality: true
+  enforce_geometry: true
+
+model:
+  backbone: osnet_ain
+  embed_dim: 512
+  pretrained: true
+  mask_gating: mean_fill
+
+train:
+  epochs: 120
+  batch_size: 64
+  lr: 3.5e-4
+  warmup_epochs: 10
+  p_identities: 16
+  k_instances: 4
+  random_erasing_p: 0.5
+  amp: true
+
+calibration:
+  method: conditional_temperature
+  top_k: 20
+  hidden_dim: 64
+  epochs: 200
+  lr: 1.0e-3
+  temperature_bounds: [0.05, 20.0]
+
+aggregation:
+  method: visibility_weighted
+  ess_correction: true
+  min_tracklet_len: 5
+
+abstention:
+  policy: conformal
+  max_false_association_rate: 0.01
+  alpha: 0.05
+
+eval:
+  ece_bins: 15
+  ece_strategy: quantile
+  bootstrap_samples: 2000
+  coverage_points: [0.5, 0.7, 0.9]
+  seeds: [0, 1, 2, 3, 4]
+
+runtime:
+  device: cuda
+  seed: 42
+  deterministic: true
+  artifact_root: ./outputs
+  log_level: INFO
+  log_format: json

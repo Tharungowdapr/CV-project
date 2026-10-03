@@ -1,0 +1,5 @@
+_base_: ../base.yaml
+name: J_efficiency
+description: "Params, FLOPs, p50/p95 latency, throughput and peak memory for every calibrator on fixed hardware."
+runtime:
+  device: cuda

@@ -1,0 +1,6 @@
+_base_: ../base.yaml
+name: E_cross_dataset_veri_to_wild
+description: "Severe joint shift. Run in both directions; the reverse config swaps name and target_dataset."
+data:
+  protocol: cross_dataset
+  target_dataset: veriwild

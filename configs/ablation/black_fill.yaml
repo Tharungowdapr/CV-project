@@ -1,0 +1,5 @@
+_base_: ../base.yaml
+name: ablation_black_fill
+description: "Black fill instead of channel-mean fill; tests whether the hard edge hurts."
+model:
+  mask_gating: black_fill

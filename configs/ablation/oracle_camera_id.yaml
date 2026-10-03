@@ -1,0 +1,5 @@
+_base_: ../base.yaml
+name: ablation_oracle_camera_id
+description: "Ground-truth one-hot camera id instead of the label-free descriptor. Quantifies what staying label-free costs."
+calibration:
+  oracle_camera_id: true

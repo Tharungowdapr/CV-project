@@ -1,0 +1,7 @@
+_base_: ../base.yaml
+name: C_occlusion_sweep
+description: "RQ1, occlusion axis. Synthetic sweep with ground-truth visibility across bands O0-O4."
+occlusion:
+  enabled: true
+  mode: synthetic
+  target_bands: ["O0", "O1", "O2", "O3", "O4"]

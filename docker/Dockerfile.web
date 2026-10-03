@@ -1,0 +1,28 @@
+# NOTE: base image pinned by tag, not digest - unlike docker/Dockerfile.
+# Run scripts/pin_base_images.sh before a production build to pin all
+# Dockerfiles to a digest consistently; a tag can move underneath you,
+# a digest cannot.
+FROM node:20-bookworm-slim AS deps
+WORKDIR /app
+COPY apps/web/package.json ./
+RUN npm install --omit=dev --no-audit --no-fund
+
+FROM node:20-bookworm-slim AS builder
+WORKDIR /app
+COPY apps/web/package.json ./
+RUN npm install --no-audit --no-fund
+COPY apps/web ./
+ARG NEXT_PUBLIC_API_URL=http://localhost:8000
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+RUN npm run build
+
+FROM node:20-bookworm-slim AS runtime
+RUN useradd --create-home --uid 10002 web
+WORKDIR /app
+COPY --from=builder --chown=web:web /app/.next/standalone ./
+COPY --from=builder --chown=web:web /app/.next/static ./.next/static
+COPY --from=builder --chown=web:web /app/public ./public
+USER web
+ENV NODE_ENV=production PORT=3000
+EXPOSE 3000
+CMD ["node", "server.js"]

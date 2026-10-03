@@ -1,0 +1,6 @@
+_base_: ../base.yaml
+name: F_unseen_vehicle_types
+description: "Does miscalibration track the generalisation gap reported for unseen vehicle types?"
+data:
+  protocol: unseen_types
+  held_out_types: ["truck", "bus", "van"]

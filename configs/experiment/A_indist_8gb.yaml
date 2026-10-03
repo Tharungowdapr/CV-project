@@ -1,0 +1,27 @@
+_base_: ../base.yaml
+name: A_in_distribution_8gb
+description: >
+  Same as A_indist.yaml (in-distribution baseline), retuned for an 8GB card
+  (e.g. RTX 5060). Batch size and PK composition are lowered to fit; AMP is
+  mandatory here, not optional. Expect a longer wall-clock time than the
+  24GB-class recipe at the same epoch count - this trades speed for fitting
+  in memory, not for a different result.
+
+data:
+  num_workers: 4          # lighter host-RAM pressure alongside VRAM pressure
+
+train:
+  batch_size: 24           # must equal p_identities * k_instances
+  p_identities: 8
+  k_instances: 3
+  amp: true                 # non-negotiable at 8GB; do not disable to "simplify"
+  epochs: 120                # unchanged - lowering batch size does not need fewer epochs
+  lr: 1.3e-4                  # scaled down roughly linearly from the 64-batch baseline (3.5e-4 * 24/64)
+  checkpoint_every: 1          # resumable checkpoint after every epoch - the most you can lose to a crash
+  max_cpu_threads: 4            # leaves cores free for the rest of the laptop while this runs
+  oom_batch_retries: 3           # a batch that OOMs is retried at half size before being skipped, not fatal
+  gpu_memory_fraction: 0.85       # leaves ~1.2GB of the 8GB for the desktop/browser/driver overhead
+  max_temp_celsius: 85             # pause between epochs above this rather than pushing a hot laptop chassis
+
+model:
+  backbone: osnet_ain        # keep OSNet; TransReID/ResNet-IBN need more headroom

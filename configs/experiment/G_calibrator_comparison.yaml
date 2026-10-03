@@ -1,0 +1,6 @@
+_base_: ../base.yaml
+name: G_calibrator_comparison
+description: "RQ2. Sweep calibration.method over all seven methods with everything else fixed."
+occlusion:
+  enabled: true
+  mode: both

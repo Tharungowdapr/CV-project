@@ -1,0 +1,6 @@
+_base_: ../base.yaml
+name: D_real_occlusion
+description: "External validity for experiment C: naturally occluded samples mined from the data."
+occlusion:
+  enabled: true
+  mode: real

@@ -1,0 +1,3 @@
+_base_: ../base.yaml
+name: A_in_distribution
+description: "Baseline on seen cameras, no induced occlusion. Establishes the encoder is competitive before any calibration claim is made."

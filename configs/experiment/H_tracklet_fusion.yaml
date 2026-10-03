@@ -1,0 +1,6 @@
+_base_: ../base.yaml
+name: H_tracklet_fusion
+description: "RQ3 part 1. Compare the three fusion rules; best_frame is the baseline that must be beaten."
+aggregation:
+  method: visibility_weighted
+  ess_correction: true

@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-ink text-paper antialiased;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(0, 240, 255, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(176, 38, 255, 0.05) 0%, transparent 40%),
+    linear-gradient(180deg, #050810 0%, #03050a 100%);
+  background-attachment: fixed;
+}
+
+/* Sci-fi grid background overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.card {
+  @apply rounded-xl border border-accent/20 bg-ink-soft/40 backdrop-blur-md shadow-[0_0_15px_rgba(0,240,255,0.05)];
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glowing edge effect on cards */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,240,255,0.5), transparent);
+}
+
+.label {
+  @apply text-[10px] uppercase tracking-[0.2em] text-accent/70 font-semibold;
+}
+
+.field {
+  @apply w-full rounded-lg border border-accent/30 bg-ink/50 px-3 py-2 text-sm text-accent
+         outline-none transition-all duration-300 focus:border-accent focus:bg-accent/5 focus:shadow-[0_0_10px_rgba(0,240,255,0.2)];
+}
+
+.btn-primary {
+  @apply relative inline-flex items-center justify-center px-6 py-2 overflow-hidden rounded-lg
+         bg-accent/10 border border-accent text-accent font-medium tracking-wide
+         transition-all duration-300 hover:bg-accent/20 hover:shadow-[0_0_15px_rgba(0,240,255,0.4)];
+}
+
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0,240,255,0.8) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.btn-primary:active::after {
+  opacity: 0.3;
+}
+

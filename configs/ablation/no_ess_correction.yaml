@@ -1,0 +1,5 @@
+_base_: ../base.yaml
+name: ablation_no_ess_correction
+description: "Log-pooling without the effective-sample-size discount: expect over-confidence."
+aggregation:
+  ess_correction: false

@@ -1,0 +1,7 @@
+_base_: ../base.yaml
+name: I_abstention
+description: "RQ3 part 2. Coverage sweep, conformal versus heuristic thresholds."
+abstention:
+  policy: conformal
+  alpha: 0.05
+  max_false_association_rate: 0.01

@@ -1,0 +1,5 @@
+_base_: ../base.yaml
+name: ablation_no_camera_descriptor
+description: "Removes c_cam from the conditioning vector. Which signal actually carries the gain?"
+calibration:
+  use_camera_descriptor: false
